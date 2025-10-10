@@ -6,8 +6,10 @@
 // console.log(currentTime);
 
 
-// const person = "Burak";
-// const age = 25;
+const person: string = "Burak";
+const age: number = 25;
+
+console.log(`My name is ${person} and I am ${age} years old.`);
 
 // Architectural pattern: MVC, Dependency Injection, MVP
 
