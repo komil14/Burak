@@ -1,18 +1,5 @@
-// console.log("Hello World");
+import dotenv from 'dotenv';
+dotenv.config();
 
-// import moment from "moment";
-
-// const currentTime = moment().format("YYYY MM DD");
-// console.log(currentTime);
-
-
-const person: string = "Burak";
-const age: number = 25;
-
-console.log(`My name is ${person} and I am ${age} years old.`);
-
-// Architectural pattern: MVC, Dependency Injection, MVP
-
-// MVC = MODEL VIEW CONTROLLER
-
-// Design pattern: Middleware, Decorator
+console.log('Server is running on port:', process.env.PORT);
+console.log('MongoDB URL:', process.env.MONGO_URL);
