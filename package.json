@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
-    "train": "ts-node train.ts",
+    "train": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/train.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
