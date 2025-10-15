@@ -1,0 +1,30 @@
+import {Request, Response} from 'express';
+import {T} from '../libs/types/common';
+
+const restaurantController: T = {}
+restaurantController.goHome = (req: Request, res: Response) => {
+    try {
+        res.send('Home Page');
+    } catch (error) {
+        console.error('Error in goHome:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+restaurantController.getLogin = (req: Request, res: Response) => {
+    try {
+        res.send('Login Page');
+    } catch (error) {
+        console.error('Error in getLogin:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+restaurantController.getSignUp = (req: Request, res: Response) => {
+    try {
+        res.send('SignUp Page');
+    } catch (error) {
+        console.error('Error in getSignUp:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+export default restaurantController;
