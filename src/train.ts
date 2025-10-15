@@ -1,10 +1,18 @@
-// TASK H:
-function positiveInt(arr: number[]): string {
-  const positiveInts = arr.filter(num => num > 0 && Number.isInteger(num));
-  return positiveInts.join('');
+// TASK H-2:
+function extractDigits(input: string): string {
+  const digits = input.split('').filter(char => /\d/.test(char));
+  return digits.join('');
 }
 
-console.log(positiveInt([3, -1, 4, 1.5, 2, -3, 5]));
+console.log(extractDigits("m14i1t"));
+
+// // TASK H:
+// function positiveInt(arr: number[]): string {
+//   const positiveInts = arr.filter(num => num > 0 && Number.isInteger(num));
+//   return positiveInts.join('');
+// }
+
+// console.log(positiveInt([3, -1, 4, 1.5, 2, -3, 5]));
 
 
 
