@@ -1,31 +1,30 @@
-import {Request, Response} from 'express';
-import {T} from '../libs/types/common';
-import MemberServece from '../models/Member.service';
+import { Request, Response } from 'express';
+import { T } from '../libs/types/common';
 
-const restaurantController: T = {}
+const restaurantController: T = {};
+
 restaurantController.goHome = (req: Request, res: Response) => {
-    try {
-        res.send('Home Page');
-    } catch (error) {
-        console.error('Error in goHome:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
+  try {
+    res.send("Home Page");
+  } catch (err) {
+    console.log("Error, goHome:", err);
+  }
+};
+
 restaurantController.getLogin = (req: Request, res: Response) => {
-    try {
-        res.send('Login Page');
-    } catch (error) {
-        console.error('Error in getLogin:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
-restaurantController.getSignUp = (req: Request, res: Response) => {
-    try {
-        res.send('SignUp Page');
-    } catch (error) {
-        console.error('Error in getSignUp:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
+  try {
+    res.send("Login Page");
+  } catch (err) {
+    console.log("Error, getLogin:", err);
+  }
+};
+
+restaurantController.getSignup = (req: Request, res: Response) => {
+  try {
+    res.send("Signup Page");
+  } catch (err) {
+    console.log("Error, getSignup:", err);
+  }
+};
 
 export default restaurantController;
