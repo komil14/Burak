@@ -20,17 +20,24 @@ export enum Message {
   FORBIDDEN = 'Forbidden',
   NOT_FOUND = 'Resource not found',
   INTERNAL_SERVER_ERROR = 'Internal server error',
+  CREATED_FAILED = "Creation failed",
 }
 
 class Errors extends Error {
-  public status: HttpCode;
-  public message: Message;
+    public status: HttpCode;
   
-  constructor(status: HttpCode, message: Message) {
-    super(message);
-    this.status = status;
-    this.message = message;
+    constructor(status: HttpCode, message: Message) {
+      super(message);
+      this.status = status;
+      Object.setPrototypeOf(this, new.target.prototype);
+    }
+  
+    toJSON() {
+      return {
+        status: this.status,
+        message: this.message,
+      };
+    }
   }
-}
 
 export default Errors;

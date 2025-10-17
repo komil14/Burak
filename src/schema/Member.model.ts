@@ -34,7 +34,6 @@ const memberSchema = new Schema({
   
     memberAddress: {
       type: String,
-      required: true,
     },
     memberImage: {
       type: String,

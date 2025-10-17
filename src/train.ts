@@ -10,6 +10,13 @@
   - try-catch
   - centralized error handling middleware
 
+
+
+API types:
+  - Traditional API
+  - RESTful API
+  - GraphQL API
+  
 */
 
 

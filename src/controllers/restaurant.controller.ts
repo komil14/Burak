@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { T } from '../libs/types/common';
+import MemberService from '../models/Member.service';
+import { MemberInput } from '../libs/types/member';
+
 
 const restaurantController: T = {};
 
@@ -29,14 +32,6 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     console.log("Error, getSignup:", err);
   }
 };
-restaurantController.getSignup = (req: Request, res: Response) => {
-  try {
-    console.log("Accessing Signup Page");
-    res.send("Signup Page");
-  } catch (err) {
-    console.log("Error, getSignup:", err);
-  }
-};
 
 restaurantController.processLogin = (req: Request, res: Response) => {
   try {
@@ -47,12 +42,19 @@ restaurantController.processLogin = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processSignup = (req: Request, res: Response) => {
+restaurantController.processSignup = async(req: Request, res: Response) => {
   try {
     console.log("Processing Signup");
-    res.send("Signup Processed");
+    console.log("req.body:", req.body);
+    const newMember: MemberInput = req.body;
+    newMember.memberType = newMember.RESTARANT;
+    
+    const memberService = new MemberService();
+    const result = await memberService.processSignup(newMember);
+    res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
+    res.send(err);
   }
 };
 
