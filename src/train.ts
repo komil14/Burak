@@ -1,10 +1,26 @@
-// TASK H-2:
-function extractDigits(input: string): string {
-  const digits = input.split('').filter(char => /\d/.test(char));
-  return digits.join('');
-}
+/* Project Standarts:
+- Logging standard
+- Naming standard:
+  - camelCase => variables, functions, methods, object properties
+  - PascalCase => classes, interfaces
+  - kebab-case => file names, URLs
+  - snake_case => database columns, css
 
-console.log(extractDigits("m14i1t"));
+-Error handling standard:
+  - try-catch
+  - centralized error handling middleware
+
+*/
+
+
+
+// TASK H-2:
+// function extractDigits(input: string): string {
+//   const digits = input.split('').filter(char => /\d/.test(char));
+//   return digits.join('');
+// }
+
+// console.log(extractDigits("m14i1t"));
 
 // // TASK H:
 // function positiveInt(arr: number[]): string {
