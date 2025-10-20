@@ -21,6 +21,10 @@ API types:
 
 
 
+
+
+
+
 // TASK H-2:
 // function extractDigits(input: string): string {
 //   const digits = input.split('').filter(char => /\d/.test(char));

@@ -21,6 +21,11 @@ export enum Message {
   NOT_FOUND = 'Resource not found',
   INTERNAL_SERVER_ERROR = 'Internal server error',
   CREATED_FAILED = "Creation failed",
+  LOGIN_FAILED = "Login failed",
+
+  USED_NICK_PHONE = "Nick or Phone already in use",
+  NO_MEMBER_NICK = "Member Nick not found",
+  WRONG_PASSWORD = "Wrong password",    
 }
 
 class Errors extends Error {

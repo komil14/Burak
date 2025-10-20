@@ -29,3 +29,8 @@ export interface MemberInput {
   memberPoints?: number;
   memberEmail: string;
 }
+
+export interface LoginInput {
+  memberNick: string;
+  memberPassword: string;
+}

@@ -24,6 +24,28 @@ class MemberService {
      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATED_FAILED);
    }
 }
+
+    public async processLogin(input: { memberNick: string; memberPassword: string; }): Promise<Member> { 
+        const member = await this.memberModel
+        .findOne(
+            { memberNick: input.memberNick, 
+              memberPassword: input.memberPassword 
+            }
+        )
+         .exec();
+        
+        if (!member) { 
+            throw new Errors(HttpCode.UNAUTHORIZED, Message.LOGIN_FAILED);
+        }
+        const isMatch = member.memberPassword === input.memberPassword;
+        if (!isMatch) {
+            throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+        }
+        
+        
+        return await this.memberModel.findById(member._id).exec();;
+    }
+
 }
 
 export default MemberService;
