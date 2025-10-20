@@ -25,7 +25,8 @@ export enum Message {
 
   USED_NICK_PHONE = "Nick or Phone already in use",
   NO_MEMBER_NICK = "Member Nick not found",
-  WRONG_PASSWORD = "Wrong password",    
+  WRONG_PASSWORD = "Wrong password",   
+  CREATE_FAILED = "Create member failed", 
 }
 
 class Errors extends Error {
