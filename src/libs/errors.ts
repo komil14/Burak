@@ -27,15 +27,25 @@ export enum Message {
   NO_MEMBER_NICK = "Member Nick not found",
   WRONG_PASSWORD = "Wrong password",   
   CREATE_FAILED = "Create member failed", 
+  SOMETHING_WENT_WRONG = "Something went wrong",
 }
 
+
 class Errors extends Error {
+    code(code: any) {
+        throw new Error('Method not implemented.');
+    }
     public status: HttpCode;
   
     constructor(status: HttpCode, message: Message) {
       super(message);
       this.status = status;
       Object.setPrototypeOf(this, new.target.prototype);
+    }
+
+    static standard = {
+      code: HttpCode.INTERNAL_SERVER_ERROR,
+      message: Message.SOMETHING_WENT_WRONG,
     }
   
     toJSON() {
