@@ -34,17 +34,17 @@ restaurantController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processSignup = async(req: AdminRequest, res: Response) => {
+restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("Processing Signup");
     console.log("req.body:", req.body);
     const newMember: MemberInput = req.body;
     newMember.memberType = newMember.RESTARANT;
-    
+
     const result = await memberService.processSignup(newMember);
-     // TODO sessions here
+    // TODO sessions here
     req.session.member = result;
-    req.session.save(function(){
+    req.session.save(function () {
       console.log("Session saved");
       res.send(result);
     });
@@ -53,11 +53,12 @@ restaurantController.processSignup = async(req: AdminRequest, res: Response) => 
     res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
-    res.send(err);
+    const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script>alert("${message}"); window.location.replace("/admin/signup") ;</script>`); 
   }
 };
 
-restaurantController.processLogin = async(req: AdminRequest, res: Response) => {
+restaurantController.processLogin = async (req: AdminRequest, res: Response) => {
   try {
     console.log("Processing Login");
     console.log("req.body:", req.body);
@@ -67,19 +68,33 @@ restaurantController.processLogin = async(req: AdminRequest, res: Response) => {
     // TODO sessions authenticate here
 
     req.session.member = result;
-    req.session.save(function(){
+    req.session.save(function () {
       console.log("Session saved");
       res.send(result);
     });
   } catch (err) {
     console.log("Error, processLogin:", err);
-    res.send(err);
+    const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script>alert("${message}"); window.location.replace("/admin/login") ;</script>`); 
+  }
+}; 
+
+restaurantController.logout = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("Processing Logout");
+    req.session.destroy(function() {
+      console.log("Session destroyed");
+      res.redirect("/admin");
+    });  
+  } catch (err) {
+    console.log("Error, logout:", err);
+    res.redirect("/admin"); 
   }
 };
 
-restaurantController.checkAuthenSession = async(req: AdminRequest, res: Response) => {
+restaurantController.checkAuthenSession = async (req: AdminRequest, res: Response) => {
   try {
-    console.log("Processing Check Authentication Session"); 
+    console.log("Processing Check Authentication Session");
 
     if (req.session?.member) {
       res.send(`</script> alert("Hi, ${req.session.member.memberNick}") </script>`);
