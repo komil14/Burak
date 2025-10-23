@@ -8,11 +8,10 @@ import { MORGAN_FORMAT } from './libs/config';
 import session from 'express-session';
 import ConnectMongoDB from 'connect-mongodb-session';
 
-const MongoDbStore = require('connect-mongodb-session')(session);
+const MongoDbStore = ConnectMongoDB(session);
 
-
-const store = new MongoDbStore(session)({
-  uri: String(process.env.MONGODB_URI),
+const store = new MongoDbStore({
+  uri: String(process.env.MONGO_URL),
   collection: 'sessions'
 });
 
