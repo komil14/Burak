@@ -22,8 +22,15 @@ API types:
 
 
 
+// K-TASK: 
 
 
+function countVowels(input: string): number {
+  const vowels = 'aeiouAEIOU';
+  return input.split('').filter(char => vowels.includes(char)).length;
+}
+
+console.log(countVowels("string")); // 1
 
 // TASK H-2:
 // function extractDigits(input: string): string {
