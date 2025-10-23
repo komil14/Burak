@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { T } from '../libs/types/common';
 import MemberService from '../models/Member.service';
 import { AdminRequest, LoginInput, MemberInput } from '../libs/types/member';
+import { Message } from '../libs/errors';
 
 const memberService = new MemberService();
 const restaurantController: T = {};
@@ -33,26 +34,6 @@ restaurantController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processLogin = async(req: AdminRequest, res: Response) => {
-  try {
-    console.log("Processing Login");
-    console.log("req.body:", req.body);
-    const input: LoginInput = req.body;
-
-    const result = await memberService.processLogin(input);
-    // TODO sessions authenticate here
-
-    req.session.member = result;
-    req.session.save(function(){
-      console.log("Session saved");
-      res.send(result);
-    });
-  } catch (err) {
-    console.log("Error, processLogin:", err);
-    res.send(err);
-  }
-};
-
 restaurantController.processSignup = async(req: AdminRequest, res: Response) => {
   try {
     console.log("Processing Signup");
@@ -75,5 +56,41 @@ restaurantController.processSignup = async(req: AdminRequest, res: Response) => 
     res.send(err);
   }
 };
+
+restaurantController.processLogin = async(req: AdminRequest, res: Response) => {
+  try {
+    console.log("Processing Login");
+    console.log("req.body:", req.body);
+    const input: LoginInput = req.body;
+
+    const result = await memberService.processLogin(input);
+    // TODO sessions authenticate here
+
+    req.session.member = result;
+    req.session.save(function(){
+      console.log("Session saved");
+      res.send(result);
+    });
+  } catch (err) {
+    console.log("Error, processLogin:", err);
+    res.send(err);
+  }
+};
+
+restaurantController.checkAuthenSession = async(req: AdminRequest, res: Response) => {
+  try {
+    console.log("Processing Check Authentication Session"); 
+
+    if (req.session?.member) {
+      res.send(`</script> alert("Hi, ${req.session.member.memberNick}") </script>`);
+    } else {
+      res.send(`<script>alert("${Message.NO_AUTHEN}")</script>`);
+    }
+  } catch (err) {
+    console.log("Error, checkAuthenSession:", err);
+    res.send(err);
+  }
+};
+
 
 export default restaurantController;
