@@ -39,7 +39,6 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
     console.log("Processing Signup");
     console.log("req.body:", req.body);
     const newMember: MemberInput = req.body;
-    newMember.memberType = newMember.RESTARANT;
 
     const result = await memberService.processSignup(newMember);
     // TODO sessions here
@@ -48,9 +47,6 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
       console.log("Session saved");
       res.send(result);
     });
-
-
-    res.send(result);
   } catch (err) {
     console.log("Error, processSignup:", err);
     const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
