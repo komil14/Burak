@@ -26,6 +26,8 @@ const palindromCheck = (word: string) => {
   return reversed === word ? true : false;
 };
 
+
+
 console.log(palindromCheck("daad"));
 
 
