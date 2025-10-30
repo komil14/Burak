@@ -28,7 +28,7 @@ export enum Message {
   WRONG_PASSWORD = "Wrong password",   
   CREATE_FAILED = "Create member failed", 
   SOMETHING_WENT_WRONG = "Something went wrong",
-  NO_AUTHEN = "No authentication found",
+  NO_AUTHEN = "You are not Authenticated, Please login first!",
 }
 
 
