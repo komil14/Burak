@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
-import { Message } from "../libs/errors";
+import Errors, { HttpCode, Message } from "../libs/errors";
 import { MemberType } from "../libs/enums/member.enum";
 
 const memberService = new MemberService();
@@ -41,15 +41,19 @@ restaurantController.processSignup = async (
 ) => {
   try {
     console.log("Processing Signup");
-    console.log("req.body:", req.body);
+    const file = req.file;
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
+
     const newMember: MemberInput = req.body;
+    newMember.memberImage = file?.path;
 
     const result = await memberService.processSignup(newMember);
     // TODO sessions here
     req.session.member = result;
     req.session.save(function () {
       console.log("Session saved");
-      res.send(result);
+      res.redirect('/admin/product/all');
     });
   } catch (err) {
     console.log("Error, processSignup:", err);
@@ -75,7 +79,7 @@ restaurantController.processLogin = async (
     req.session.member = result;
     req.session.save(function () {
       console.log("Session saved");
-      res.send(result);
+      res.redirect('/admin/product/all');
     });
   } catch (err) {
     console.log("Error, processLogin:", err);
