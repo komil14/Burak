@@ -1,36 +1,44 @@
-/* Project Standarts:
-- Logging standard
-- Naming standard:
-  - camelCase => variables, functions, methods, object properties
-  - PascalCase => classes, interfaces
-  - kebab-case => file names, URLs
-  - snake_case => database columns, css
-
--Error handling standard:
-  - try-catch
-  - centralized error handling middleware
-
-
-
-API types:
-  - Traditional API
-  - RESTful API
-  - GraphQL API
-  
+/* Project Standards:
+ - Logging standards
+ - Naming standards:
+    function, method, variable => CAMEL
+    class => PASCAL
+    folder, file => KEBAB
+    css => SNAKE
+ - Error handling
 */
 
+/* Request:
+   Traditional Api
+   Rest Api
+   GraphQL Api
+   ...
+*/
 
+/* Frontend Development:
+   Traditional FD => SSR => EJS
+   Modern FD => SPA => REACT
+*/
 
+/* Cookies:
+   request join
+   self destroy
+*/
 
-// K-TASK: 
+/* Validation:
+   Frontend validation
+   Backend validation
+   Database validation
+*/
 
+// K-TASK:
 
-function countVowels(input: string): number {
-  const vowels = 'aeiouAEIOU';
-  return input.split('').filter(char => vowels.includes(char)).length;
-}
+// function countVowels(input: string): number {
+//   const vowels = 'aeiouAEIOU';
+//   return input.split('').filter(char => vowels.includes(char)).length;
+// }
 
-console.log(countVowels("string")); // 1
+// console.log(countVowels("string")); // 1
 
 // TASK H-2:
 // function extractDigits(input: string): string {
@@ -48,8 +56,6 @@ console.log(countVowels("string")); // 1
 
 // console.log(positiveInt([3, -1, 4, 1.5, 2, -3, 5]));
 
-
-
 // TASK G:
 // function getHighestIndex(arr: number[]): number {
 //   let highest = -Infinity;
@@ -66,10 +72,9 @@ console.log(countVowels("string")); // 1
 // }
 
 // // Test cases
-// console.log(getHighestIndex([5, 21, 12, 21, 8])); 
+// console.log(getHighestIndex([5, 21, 12, 21, 8]));
 // console.log(getHighestIndex([-10, -20, -5, -15]));
 // console.log(getHighestIndex([1, 2, 3, 4, 5]));
-
 
 // console.log("Hello World");
 
@@ -77,7 +82,6 @@ console.log(countVowels("string")); // 1
 
 // const currentTime = moment().format("YYYY MM DD");
 // console.log(currentTime);
-
 
 // const person: string = "Burak";
 // const age: number = 25;
