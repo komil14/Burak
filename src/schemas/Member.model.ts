@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { MemberStatus, MemberType } from "../libs/enums/member.enum";
+import { MemberStatus } from "../libs/enums/member.enum";
+import { MemberType } from "../libs/enums/member.enum";
 
 const memberSchema = new Schema(
   {
@@ -24,6 +25,7 @@ const memberSchema = new Schema(
     memberPhone: {
       type: String,
       index: { unique: true, sparse: true },
+      required: true,
     },
 
     memberPassword: {
@@ -35,16 +37,21 @@ const memberSchema = new Schema(
     memberAddress: {
       type: String,
     },
+
     memberImage: {
       type: String,
     },
+
     memberDescription: {
       type: String,
     },
+
+    memberPoints: {
+      type: Number,
+      default: 0,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 export default mongoose.model("Member", memberSchema);

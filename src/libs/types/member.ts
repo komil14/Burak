@@ -1,35 +1,44 @@
 import { Session } from "express-session";
-import { MemberStatus, MemberType } from "../enums/member.enum";
 import { Request } from "express";
+import { MemberStatus, MemberType } from "../enums/member.enum";
+import mongoose, { Types } from "mongoose";
 import { ObjectId } from "mongoose";
+
 export interface Member {
-    _id: ObjectId;
-    memberType: MemberType;
-    memberStatus: MemberStatus;
-    memberNick: string;
-    memberPhone: string;
-    memberPassword?: string;
-    memberAddress?: string;
-    memberDesc?: string;
-    memberImage?: string;
-    memberPoints: number;
-    createdAt: Date;
-    updatedAt: Date;
-  }
+  _id: ObjectId;
+  memberNick: string;
+  memberPhone: string;
+  memberPassword?: string;
+  memberType: MemberType;
+  memberStatus: MemberStatus;
+  memberAddress?: string;
+  memberDescription?: string;
+  memberImage?: string;
+  memberPoints: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-
+export interface MemberUpdateInput {
+  _id: ObjectId;
+  memberNick?: string;
+  memberPhone?: string;
+  memberPassword?: string;
+  memberStatus?: MemberStatus;
+  memberAddress?: string;
+  memberDescription?: string;
+  memberImage?: string;
+}
 export interface MemberInput {
-  RESTARANT: MemberType.RESTAURANT;
   memberType?: MemberType;
   memberStatus?: MemberStatus;
   memberNick: string;
   memberPhone: string;
   memberPassword: string;
   memberAddress?: string;
-  memberDesc?: string;
   memberImage?: string;
-  memberPoints?: number;
-  memberEmail: string;
+  memberDescription?: string;
+  memberPoints?: string;
 }
 
 export interface LoginInput {
@@ -38,8 +47,8 @@ export interface LoginInput {
 }
 
 export interface AdminRequest extends Request {
-    member: Member;
-    session: Session & { member: Member };
-    file: Express.Multer.File;
-    files: Express.Multer.File[];
+  member: Member;
+  session: Session & { member: Member };
+  file: Express.Multer.File;
+  files: Express.Multer.File[];
 }

@@ -1,14 +1,45 @@
-<%- include ('includes/header') %>
+<%- include('includes/header') %>
 
-<div style="font-size: 40px; color: aliceblue;">Login Page</div>
-<div class="card" style="width: 18rem;">
-  <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Login Card</h5>
-    <p class="card-text">Please enter your credentials to log in.</p>
-    <a href="#" class="btn btn-primary">Log In</a>
-    <a href="/forgot-password" class="btn btn-secondary">Forgot Password?</a>
-    <a href="/register" class="btn btn-link">Create an Account</a>
-  </div>
+<link rel="stylesheet" type="text/css" href="/css/login.css" />
+
+<body>
+  <form class="login-container" action="/admin/login" METHOD="POST">
+    <div class="login-frame">
+      <div class="login-top">
+        <span>Enter</span>
+        <div>Go back <a href="/admin" style="color: #6440fb">Home</a></div>
+        <p>
+          Not registered yet?
+          <a href="/admin/signup" style="color: #6440fb">Signup</a>
+        </p>
+      </div>
+      <div class="login-input-frame">
+        <div class="login-input-container">
+          <label>Restaurant *</label>
+          <input
+            type="text"
+            name="memberNick"
+            class="member-nick"
+            placeholder="Username"
+            value=""
+            required
+          />
+        </div>
+        <div class="login-input-container">
+          <label>Password *</label>
+          <input
+            type="password"
+            name="memberPassword"
+            class="member-password"
+            placeholder="Password"
+            value=""
+            required
+          />
+        </div>
+      </div>
+      <button class="login-btn btn" name="login" type="submit">Login</button>
+    </div>
+  </form>
 </body>
-<%- include ('includes/footer') %>
+
+<%- include('includes/footer') %>
