@@ -46,7 +46,6 @@ restaurantController.processSignup = async (
     console.log("processSignup");
 
     const file = req.file;
-    console.log("req.file", req.file);
     const newMember: MemberInput = req.body;
     newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTAURANT;
