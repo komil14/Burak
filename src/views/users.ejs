@@ -62,16 +62,20 @@
             </thead>
             <!--  LOOP PRODUCTS: START  -->
             <tbody style="background: white">
-              <td>1</td>
-              <td>David</td>
-              <td>821024697878</td>
-              <td style="width: 13%">
-                <select class="spec-select member-status">
-                  <option value="ACTIVE" selected>ACTIVE</option>
-                  <option value="BLOCK">BLOCK</option>
-                  <option value="DELETE">DELETE</option>
-                </select>
-              </td>
+              <% users.forEach((member, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= member.memberNick %></td>
+                  <td><%= member.memberPhone %></td>
+                  <td style="width: 13%">
+                    <select class="spec-select member-status">
+                      <option value="ACTIVE" <%= member.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
+                      <option value="BLOCK" <%= member.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
+                      <option value="DELETE" <%= member.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                    </select>
+                  </td>
+                </tr>
+              <% }) %>
             </tbody>
             <!--  LOOP PRODUCTS: END  -->
           </table>

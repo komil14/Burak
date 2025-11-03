@@ -45,19 +45,23 @@
             </thead>
             <!--  LOOP PRODUCTS: START  -->
             <tbody style="background: white">
-              <td>1</td>
-              <td>Steak</td>
-              <td>Dish</td>
-              <td>NORMAL</td>
-              <td>11</td>
-              <td>100</td>
-              <td>
-                <select class="spec-select new-product-status">
-                  <option value="PAUSE" selected>PAUSE</option>
-                  <option value="PROCESS">PROCESS</option>
-                  <option value="DELETE">DELETE</option>
-                </select>
-              </td>
+              <% products.forEach((product, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= product.productName %></td>
+                  <td><%= product.productCollection %></td>
+                  <td><%= product.productStatus %></td>
+                  <td><%= product.productPrice %></td>
+                  <td><%= product.productLeftCount %></td>
+                  <td>
+                    <select class="spec-select new-product-status">
+                      <option value="PAUSE" <%= product.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                      <option value="PROCESS" <%= product.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                      <option value="DELETE" <%= product.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                    </select>
+                  </td>
+                </tr>
+              <% }) %>
             </tbody>
             <!--  LOOP PRODUCTS: END  -->
           </table>
