@@ -1,33 +1,22 @@
-/* 
-VPS =====> Vertual Private Server
-A virtual machine running on a physical server.
+/**
+O-TASK:
 
-VPC =====> Vertual Private Cloud
-A private network inside a cloud platform
+Shunday function yozing, u har xil valuelardan iborat array qabul qilsin va array ichidagi sonlar yigindisini hisoblab chiqqan javobni qaytarsin.
+MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]) return 45
 
-*/
+@MITASK
 
-/* Project Standards:
--Logging standards(Morgan Format)
-- Naming standards
-    function, method, variable => CAMEL case
-    class => PASCAL case
-    folder => KEBAB case
-    css => SNAKE case
+ */
 
--ERROR HANDLING 
+function calculateSumOfNumbers(arr: any[]): number {
+    return arr.reduce((sum, item) => {
+        if (typeof item === 'number') {
+            return sum + item;
+        }
+        return sum;
+    }, 0);
+}
 
-*/
-
-/*N-TASK: */
-
-const palindromCheck = (word: string) => {
-  const reversed = word.split("").reverse().join("");
-  return reversed === word ? true : false;
-};
-
-
-
-console.log(palindromCheck("daad"));
+console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
 
 
