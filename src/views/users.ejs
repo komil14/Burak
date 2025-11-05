@@ -26,7 +26,7 @@
     <% } else { %>
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item" style="cursor: pointer"> 
           <a class="nav-link active" href="/admin/">Home</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
@@ -61,22 +61,24 @@
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
-            <tbody style="background: white">
-              <% users.forEach((member, index) => { %>
-                <tr>
-                  <td><%= index + 1 %></td>
-                  <td><%= member.memberNick %></td>
-                  <td><%= member.memberPhone %></td>
-                  <td style="width: 13%">
-                    <select class="spec-select member-status">
-                      <option value="ACTIVE" <%= member.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
-                      <option value="BLOCK" <%= member.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
-                      <option value="DELETE" <%= member.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
-                    </select>
-                  </td>
-                </tr>
-              <% }) %>
+            <% users.map(function(value, key) { %>
+              <tbody style="background: white">
+              <tr>
+                <td><%= key + 1 %></td>
+                <td><%= value.memberNick %></td>
+                <td><%= value.memberPhone %></td>
+                <td style="width: 13%">
+                  <select class="spec-select member-status"
+                  id="<%= value._id %>">
+                    <option value="ACTIVE"  <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
+                    <option value="BLOCK"  <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
+                    <option value="DELETE"  <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                  </select>
+                </td>
+              </tr>
             </tbody>
+              <% } ) %>
+
             <!--  LOOP PRODUCTS: END  -->
           </table>
         </div>

@@ -44,25 +44,30 @@
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
+            <% products.map(function(value, key){ %>
             <tbody style="background: white">
-              <% products.forEach((product, index) => { %>
-                <tr>
-                  <td><%= index + 1 %></td>
-                  <td><%= product.productName %></td>
-                  <td><%= product.productCollection %></td>
-                  <td><%= product.productStatus %></td>
-                  <td><%= product.productPrice %></td>
-                  <td><%= product.productLeftCount %></td>
-                  <td>
-                    <select class="spec-select new-product-status">
-                      <option value="PAUSE" <%= product.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
-                      <option value="PROCESS" <%= product.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
-                      <option value="DELETE" <%= product.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
-                    </select>
-                  </td>
-                </tr>
-              <% }) %>
+              <td><%= key+1%></td>
+              <td><%= value.productName%></td>
+              <td><%= value.productCollection%></td>
+              <td>
+                <%= value.productCollection === "DRINK" ? value.productVolume :
+                value.productSize %>
+              </td>
+              <td><%= value.productPrice%></td>
+              <td><%= value.productLeftCount%></td>
+              <td>
+                <select
+                  class="spec-select new-product-status"
+                  id= "<%= value._id %>"
+                >
+                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %> >PAUSE</option>
+                  <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                </select>
+              </td>
             </tbody>
+            <% })%>
+
             <!--  LOOP PRODUCTS: END  -->
           </table>
           <div
@@ -75,6 +80,7 @@
           </div>
         </div>
         <form
+        onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
           class="dish-container"
@@ -168,7 +174,7 @@
                   id="file"
                   name="productImages"
                   class="image-one"
-                  required
+                  onchange="previewFileHandler(this, 1)"
                 />
               </div>
               <div class="upload-img-box">
@@ -178,6 +184,7 @@
                   id="file"
                   name="productImages"
                   class="image-two"
+                  onchange="previewFileHandler(this, 2)"
                 />
               </div>
               <div class="upload-img-box">
@@ -187,6 +194,7 @@
                   id="file"
                   name="productImages"
                   class="image-three"
+                  onchange="previewFileHandler(this, 3)"
                 />
               </div>
               <div class="upload-img-box">
@@ -196,6 +204,7 @@
                   id="file"
                   name="productImages"
                   class="image-four"
+                  onchange="previewFileHandler(this, 4)"
                 />
               </div>
               <div class="upload-img-box">
@@ -205,6 +214,7 @@
                   id="file"
                   name="productImages"
                   class="image-five"
+                  onchange="previewFileHandler(this, 5)"
                 />
               </div>
               <input name="restaurantIid" class="restaurant-id" hidden />
@@ -212,7 +222,7 @@
           </div>
 
           <div class="operation-buttons">
-            <button class="btn btn-danger" id="cancel-btn">Cancel</button>
+            <button type ="button" class="btn btn-danger" id="cancel-btn">Cancel</button>
             <button type="submit" class="btn btn-primary" id="create-btn">
               Create
             </button>

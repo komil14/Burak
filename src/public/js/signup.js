@@ -1,5 +1,4 @@
 console.log("Signup frontend javascript file");
-
 $(function () {
   const fileTarget = $(".file-box .upload-hidden");
   let filename;
@@ -9,6 +8,7 @@ $(function () {
       const uploadFile = $(this)[0].files[0];
       const fileType = uploadFile["type"];
       const validImageType = ["image/jpg", "image/jpeg", "image/png"];
+
       if (!validImageType.includes(fileType)) {
         alert("Please insert only jpeg, jpg and png!");
       } else {
@@ -18,14 +18,16 @@ $(function () {
             .attr("src", URL.createObjectURL(uploadFile))
             .addClass("success");
         }
-        filename = $(this)[0].files[0].name;
-        $(this).siblings(".upload-name").val(filename);
       }
+
+      filename = $(this)[0].files[0].name;
+      $(this).siblings(".upload-name").val(filename);
     }
   });
 });
 
 function validateSignupForm() {
+  console.log("Function is working");
   const memberNick = $(".member-nick").val();
   const memberPhone = $(".member-phone").val();
   const memberPassword = $(".member-password").val();
@@ -33,27 +35,26 @@ function validateSignupForm() {
 
   if (
     memberNick === "" ||
-    memberPhone === "" ||
     memberPassword === "" ||
+    memberPhone === "" ||
     confirmPassword === ""
   ) {
-    alert("Please insert all required inputs!");
+    alert("Please Insert All Required Fields!");
     return false;
   }
-
   if (memberPassword !== confirmPassword) {
-    alert("Password differs, please check!");
+    alert("Password is different, please check it! ");
     return false;
   }
 
-  const memberImage = $(".member-image").get(0).files.length
-    ? $(".member-image").get(0).files[0].name
-    : null;
-
+  const inputMember = $(".member-image").get(0);
+  const memberImage =
+    inputMember && inputMember.files.length > 0
+      ? $(".member-image").get(0).files[0].name
+      : null;
   if (!memberImage) {
-    alert("Please insert restaurant image!");
+    alert("Please Instert Restaurant Image!");
     return false;
   }
-
   return true;
 }
