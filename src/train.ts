@@ -1,8 +1,46 @@
-import { T } from "./libs/types/common";
-/*
-P-TASK:
-*/
-function objectToArray(obj: T) {
-  return Object.entries(obj);
+// // S-TASK:
+
+// function missingNumber(nums: number[]): number {
+//     const n = nums.length;
+//     const expectedSum = (n * (n + 1)) / 2;
+//     const actualSum = nums.reduce((acc, curr) => acc + curr, 0);
+//     return expectedSum - actualSum;
+// }
+
+// console.log(missingNumber([3, 0, 1])); // 2
+// console.log(missingNumber([0, 1]));    // 2
+// console.log(missingNumber([9,6,4,2,3,5,7,0,1])); // 8
+
+
+// T-TASK:
+
+function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+    const mergedArray: number[] = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+            mergedArray.push(arr1[i]);
+            i++;
+        } else {
+            mergedArray.push(arr2[j]);
+            j++;
+        }
+    }
+
+    while (i < arr1.length) {
+        mergedArray.push(arr1[i]);
+        i++;
+    }
+
+    while (j < arr2.length) {
+        mergedArray.push(arr2[j]);
+        j++;
+    }
+
+    return mergedArray;
 }
-console.log(objectToArray({ a: 10, g: 20 }));
+
+console.log(mergeSortedArrays([0,3,4,31], [4,6,30]));
+console.log(mergeSortedArrays([1,5,9], [2,6,8]));
