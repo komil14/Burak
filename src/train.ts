@@ -1,11 +1,20 @@
-// TASK H:
-function positiveInt(arr: number[]): string {
-  const positiveInts = arr.filter(num => num > 0 && Number.isInteger(num));
-  return positiveInts.join('');
+//V Task
+
+function countChars(str) {
+  const result = {};
+
+  for (let char of str) {
+    if (result[char]) {
+      result[char]++; 
+    } else {
+      result[char] = 1;
+    }
+  }
+
+  return result;
 }
 
-console.log(positiveInt([3, -1, 4, 1.5, 2, -3, 5]));
-
+console.log(countChars("hello")); 
 
 
 // TASK G:
