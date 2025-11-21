@@ -1,3 +1,21 @@
+//V TASK 
+function countChars(str) {
+  const result = {};
+
+  for (let char of str) {
+    if (result[char]) {
+      result[char]++; 
+    } else {
+      result[char] = 1;
+    }
+  }
+
+  return result;
+}
+
+console.log(countChars("hello")); 
+
+
 // U-TASK:
 function sumOdds(num: number): number {
     let count = 0;
@@ -9,7 +27,7 @@ function sumOdds(num: number): number {
     return count;
 }
 
-console.log(sumOdds(9));
+//console.log(sumOdds(9));
 
 
 // // S-TASK:
