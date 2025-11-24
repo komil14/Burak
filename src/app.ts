@@ -7,6 +7,7 @@ import { MORGAN_FORMAT } from "./libs/config";
 import session from "express-session"; //
 import ConnectMongoDBSession from "connect-mongodb-session";
 import { T } from "./libs/types/common";
+import cookieParser from "cookie-parser";
 
 const MongoDBStore = ConnectMongoDBSession(session);
 const store = new MongoDBStore({
@@ -19,6 +20,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
 //------>2-SESSIONS<----------

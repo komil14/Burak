@@ -33,13 +33,18 @@ class MemberService {
   public async login(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
+        {
+          memberNick: input.memberNick,
+          memberStatus: { $ne: MemberStatus.DELETE },
+        },
+        { memberNick: 1, memberPassword: 1, memberStatus: 1 }
       )
       .exec();
 
     if (!member) {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    } else if (member.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.FORBIDDEN, Message.USER_BLOCKED);
     }
 
     const passwordMatch = await bcrypt.compare(
@@ -52,7 +57,19 @@ class MemberService {
     }
 
     const result = await this.memberModel.findById(member._id).lean().exec();
+    // Couldnt crewate a JWT with mongoose document, so convert to plain object, ask students as question
 
+    return result;
+  }
+
+  public async getMemberDetail(input: Member): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(input._id);
+    const result = await this.memberModel
+      .findOne({ _id: memberId, memberStatus: MemberStatus.ACTIVE })
+      .exec();
+    if (!result) {
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    }
     return result;
   }
 

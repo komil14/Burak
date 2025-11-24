@@ -61,7 +61,6 @@ function validateForm() {
     productLeftCount === "" ||
     productCollection === "" ||
     productDesc === ""
-    
   ) {
     alert("Please fill all required inputs");
     return false;
@@ -87,26 +86,4 @@ function previewFileHandler(input, order) {
       reader.readAsDataURL(file);
     }
   }
-}
-
-function previewFileHandler2(input, order){
-  const imgClassName = input.className;
-  const fileType = file["type"]
-  const validImageType = ["image/jpg"]
-
-  if(!validImageType.includes(fileType)){
-    alert("Please insert only jpeg, jpg, png!");
-  }else{
-    if (file){
-      const reader = new FileReader();
-      reader.onload = function(){
-        $(`#image-section-${order}`).attr("src", reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-}
-
-function validateSignupForm(){
-  console.log("update anything that as you can for this project ")
 }
