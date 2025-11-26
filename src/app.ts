@@ -18,6 +18,7 @@ const store = new MongoDBStore({
 //------>1-ENTERANCE<---------
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static("./uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
