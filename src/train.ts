@@ -1,43 +1,27 @@
-/* 
-VPS =====> Vertual Private Server
-A virtual machine running on a physical server.
+/*
+X-TASK:
 
-VPC =====> Vertual Private Cloud
-A private network inside a cloud platform
-
-*/
-
-import { T } from "./libs/types/common";
-
-/* Project Standards:
--Logging standards(Morgan Format)
-- Naming standards
-    function, method, variable => CAMEL case
-    class => PASCAL case
-    folder => KEBAB case
-    css => SNAKE case
-
--ERROR HANDLING 
-
-*/
-
-/*W-TASK:
-
-Shunday function yozing, uni array va number parametrlari bolsin. Function arrayni numberda berilgan uzunlikda kesib bolaklarga ajratilgan array holatida qaytarsin
-MASALAN: chunkArray([1,2,3,4,5,6,7,8,9,10], 3) return [[1,2,3], [4,5,6], [7,8,9], [10]]
-
+ Shunday function yozing, uni object va string parapetrlari bolsin. Function string parametri object ichida necha marotaba takrorlanganligini qaytarsin (nested object bolsa ham sanasin)
+ MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2
 
 @MITASK
 */
+export function countOccurrences(obj: any, key: string): number {
+  let count = 0;
 
-export function chunkArray<T>(arr: T[], size: number): T[][] {
-  const result: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
+  function recursiveCount(o: any) {
+    for (const k in o) {
+      if (k === key) {
+        count++;
+      }
+      if (typeof o[k] === 'object' && o[k] !== null) {
+        recursiveCount(o[k]);
+      }
+    }
   }
-  return result;
-}
 
-const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const chunked = chunkArray(testArray, 3);
-console.log(chunked);
+  recursiveCount(obj);
+  return count;
+} 
+console.log(countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model')); 
+console.log(countOccurrences({a: 1, b: {c: 2, d: {a: 3}}}, 'a'));
