@@ -18,6 +18,7 @@ router
     makeUploader("members").single("memberImage"),
     memberController.updateMember
   )
-  .get("/member/top-users", memberController.getTopUsers);
+  .get("/member/top-users", memberController.getTopUsers)
+  .get("/member/restaurant", memberController.getRestaurant);
 
 export default router;
