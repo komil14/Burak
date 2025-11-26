@@ -3,14 +3,10 @@ import memberController from "./controllers/member.controller";
 import makeUploader from "./libs/utils/uploader";
 const router = express.Router();
 
-router.post("/member/signup", memberController.signup);
-router.post("/member/login", memberController.login);
-router.post(
-  "/member/logout",
-  memberController.verifyAuth,
-  memberController.logout
-);
 router
+  .post("/member/signup", memberController.signup)
+  .post("/member/login", memberController.login)
+  .post("/member/logout", memberController.verifyAuth, memberController.logout)
   .get(
     "/member/detail",
     memberController.verifyAuth,
@@ -21,6 +17,7 @@ router
     memberController.verifyAuth,
     makeUploader("members").single("memberImage"),
     memberController.updateMember
-  );
+  )
+  .get("/member/top-users", memberController.getTopUsers);
 
 export default router;
