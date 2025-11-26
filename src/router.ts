@@ -23,6 +23,12 @@ router
   .get("/member/restaurant", memberController.getRestaurant);
 
 /*PRODUCTS*/
-router.get("/product/all", productController.getProducts);
+router
+  .get("/product/all", productController.getProducts)
+  .get(
+    "/product/:id",
+    memberController.retrieveAuth,
+    productController.getProduct
+  );
 
 export default router;
