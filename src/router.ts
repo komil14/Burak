@@ -32,8 +32,23 @@ router
     productController.getProduct
   );
 
-  /* ORDERS */
-router
-  .post("/order/create", memberController.verifyAuth, orderController.createOrder)
+/**  ORDER **/
+router.post(
+  "/order/create",
+  memberController.verifyAuth,
+  orderController.createOrder
+);
+
+router.get(
+  "/order/all",
+  memberController.verifyAuth,
+  orderController.getMyOrders
+);
+
+router.post(
+  "/order/update",
+  memberController.verifyAuth,
+  orderController.updateMyOrder
+);
 
 export default router;

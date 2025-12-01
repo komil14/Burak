@@ -7,16 +7,18 @@ const orderSchema = new Schema(
       type: Number,
       required: true,
     },
+
     orderDelivery: {
       type: Number,
       required: true,
     },
+
     orderStatus: {
       type: String,
       enum: OrderStatus,
-      required: true,
       default: OrderStatus.PAUSE,
     },
+
     memberId: {
       type: Schema.Types.ObjectId,
       required: true,

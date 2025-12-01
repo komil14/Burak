@@ -16,6 +16,7 @@ class MemberService {
     this.memberModel = MemberModel;
   }
   /* SPA */
+
   public async getRestaurant(): Promise<Member> {
     const result = await this.memberModel
       .findOne({
@@ -29,6 +30,7 @@ class MemberService {
     }
     return result;
   }
+
   public async signup(input: MemberInput): Promise<Member> {
     const salt: string = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -39,25 +41,20 @@ class MemberService {
       return result.toJSON();
     } catch (err) {
       console.error("Error, model_singup: ", err);
-      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_MEMBER_NICK);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
 
   public async login(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
-        {
-          memberNick: input.memberNick,
-          memberStatus: { $ne: MemberStatus.DELETE },
-        },
+        { memberNick: input.memberNick },
         { memberNick: 1, memberPassword: 1, memberStatus: 1 }
       )
       .exec();
 
     if (!member) {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    } else if (member.memberStatus === MemberStatus.BLOCK) {
-      throw new Errors(HttpCode.FORBIDDEN, Message.USER_BLOCKED);
     }
 
     const passwordMatch = await bcrypt.compare(
@@ -70,7 +67,6 @@ class MemberService {
     }
 
     const result = await this.memberModel.findById(member._id).lean().exec();
-    // Couldnt crewate a JWT with mongoose document, so convert to plain object, ask students as question
 
     return result;
   }
@@ -105,7 +101,24 @@ class MemberService {
       .limit(4)
       .exec();
 
-    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result.length)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
+  public async addUserPoint(member: Member, point: Number) {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel.findOneAndUpdate(
+      {
+        _id: memberId,
+        memberTye: MemberType.USER,
+        memberStatus: MemberStatus.ACTIVE,
+      },
+      {
+        $inc: { memberPoints: point },
+      },
+      { new: true }
+    );
     return result;
   }
 
