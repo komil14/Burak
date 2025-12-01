@@ -1,36 +1,15 @@
-/* 
-VPS =====> Vertual Private Server
-A virtual machine running on a physical server.
+/*
+Z-TASK:
 
-VPC =====> Vertual Private Cloud
-A private network inside a cloud platform
-
-*/
-
-import { T } from "./libs/types/common";
-
-/* Project Standards:
--Logging standards(Morgan Format)
-- Naming standards
-    function, method, variable => CAMEL case
-    class => PASCAL case
-    folder => KEBAB case
-    css => SNAKE case
-
--ERROR HANDLING 
-
-*/
-
-/*Y-TASK:
-
- Shunday function yozing, uni 2 ta array parapetri bolsin. Function ikkala arrayda ham ishtirok etgan qiymatlarni bir arrayda qaytarsin
- MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
+Shunday function yozing, uni sonlardan tashkil topgan array qabul qilsin. Function arraydagi juft sonlarni yigindisini qaytarsin
+MASALAN: sumEvens([1,2,3]) return 2
 
 @MITASK
 */
+export function sumEvens(numbers: number[]): number {
+  return numbers
+    .filter((num) => num % 2 === 0)
+    .reduce((acc, curr) => acc + curr, 0);
+}   
+ console.log(sumEvens([1, 2, 3, 4, 5, 6]));
 
-export function findIntersection(arr1: any[], arr2: any[]) {
-  return arr1.filter((value) => arr2.includes(value));
-}
-
-console.log(findIntersection([1, 2, 3, true], [3, 2, 0, true]));
