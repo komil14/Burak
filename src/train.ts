@@ -1,15 +1,10 @@
-/*
-Z-TASK:
+// ZA-TASK:
 
-Shunday function yozing, uni sonlardan tashkil topgan array qabul qilsin. Function arraydagi juft sonlarni yigindisini qaytarsin
-MASALAN: sumEvens([1,2,3]) return 2
-
-@MITASK
-*/
-export function sumEvens(numbers: number[]): number {
-  return numbers
-    .filter((num) => num % 2 === 0)
-    .reduce((acc, curr) => acc + curr, 0);
+function sortByAge(arr: { age: number }[]): { age: number }[] {
+    return arr.sort((a, b) => a.age - b.age);
 }   
- console.log(sumEvens([1, 2, 3, 4, 5, 6]));
+
+const input = [{ age: 23 }, { age: 21 }, { age: 13 }];
+const output = sortByAge(input);
+console.log(output); 
 
