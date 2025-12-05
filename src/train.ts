@@ -1,10 +1,10 @@
-// ZA-TASK:
+/*
+ZC-TASK:
+*/
 
-function sortByAge(arr: { age: number }[]): { age: number }[] {
-    return arr.sort((a, b) => a.age - b.age);
-}   
+function celsiusToFahrenheit(celsius: number): number {
+    return (celsius * 9/5) + 32;
+}
 
-const input = [{ age: 23 }, { age: 21 }, { age: 13 }];
-const output = sortByAge(input);
-console.log(output); 
-
+console.log(celsiusToFahrenheit(0)); // 32
+console.log(celsiusToFahrenheit(100)); // 212
