@@ -21,23 +21,21 @@ import { T } from "./libs/types/common";
 
 */
 
-/*ZE-TASK:
+/*ZF-TASK:
 
-Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
-MASALAN: removeDuplicate('stringg') return 'string'
+Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
+MASALAN: capitalizeWords('name should be a string') return 'Name Should be a String'
 
 @MITASK
 */
 
-export function removeDuplicate(str: string): string {
-  let result = "";
-  for (let i = 0; i < str.length; i++) {
-    if (result.indexOf(str[i]) === -1) {
-      result += str[i];
-    }
-  }
-  return result;
+export function capitalizeWords(input: string): string {
+  return input
+    .split(" ")
+    .map((word) =>
+      word.length > 2 ? word.charAt(0).toUpperCase() + word.slice(1) : word
+    )
+    .join(" ");
 }
 
-console.log(removeDuplicate("stringg"));
-console.log(removeDuplicate("hello world"));
+console.log(capitalizeWords("name should be a string"));

@@ -38,7 +38,7 @@ class MemberService {
     try {
       const result = await this.memberModel.create(input);
       result.memberPassword = "";
-      return result.toJSON();
+      return result;
     } catch (err) {
       console.error("Error, model_singup: ", err);
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
@@ -68,7 +68,7 @@ class MemberService {
 
     const result = await this.memberModel.findById(member._id).lean().exec();
 
-    return result.toJSON();
+    return result;
   }
 
   public async getMemberDetail(input: Member): Promise<Member> {

@@ -51,7 +51,8 @@ restaurantController.processSignup = async (
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path;
+    // Normalize stored path to forward slashes to keep URLs valid
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT;
     const result = await memberService.processSignup(newMember);
 

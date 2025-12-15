@@ -88,7 +88,8 @@ memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
     console.log("updateMember");
     const input = req.body;
     if (req.file) {
-      input.memberImage = req.file.path.replace(/\\/, "/");
+      // Normalize Windows-style paths so stored URLs work on all platforms
+      input.memberImage = req.file.path.replace(/\\/g, "/");
     }
     const result: MemberUpdateInput = await memberService.updateMember(
       req.member,
