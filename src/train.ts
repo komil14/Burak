@@ -1,17 +1,23 @@
 /*
-ZG-TASK:
+ZH-TASK:
 
-Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin. 
-MASALAN: capitalizeWords('name should be a string') return 'name_should_be_a_string'
+Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni hammasini bir array qilib qaytarsin. 
+MASALAN: findDisappearedNumbers([1, 3, 4, 7]) return [2, 5, 6]
 
 @MITASK
 */
 
-export function capitalizeWords(input: string): string {
-  return input.split(' ').join('_');
-} 
+function findDisappearedNumbers(nums: number[]): number[] {
+  const maxNum = Math.max(...nums);
+  const numSet = new Set(nums);
+  const disappearedNumbers: number[] = [];
 
-// Test cases
-console.log(capitalizeWords('name should be a string')); 
-console.log(capitalizeWords('hello world'));
-console.log(capitalizeWords('convert this to snake case')); 
+  for (let i = 1; i <= maxNum; i++) {
+    if (!numSet.has(i)) {
+      disappearedNumbers.push(i);
+    }
+  }
+
+  return disappearedNumbers;
+}
+console.log(findDisappearedNumbers([1, 3, 4, 7]));
