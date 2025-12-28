@@ -1,30 +1,19 @@
 /*
-TASK ZJ:
+ZK-TASK:
 
-Shunday function yozing, u berilgan array ichidagi
-raqamlarni qiymatini hisoblab qaytarsin.
-
-MASALAN: reduceNestedArray([1, [1, 2, [4]]]); return 8;
+Shunday function yozing, u har soniyada bir marta consolega 1 dan 5 gacha bolgan raqamlarni chop etsin va 5 soniyadan keyin ishini toxtatsin.
+MASALAN: printNumbers()
 */
 
-function reduceNestedArray(arr: any[]): number {
-  let sum = 0;
-
-  function helper(subArr: any[]) {
-    for (const item of subArr) {
-      if (Array.isArray(item)) {
-        helper(item);
-      } else if (typeof item === 'number') {
-        sum += item;
-      }
-    }
-  }
-
-  helper(arr);
-  return sum;
+function printNumbers() {
+    let count = 1;
+    const intervalId = setInterval(() => {
+        console.log(count);
+        if (count === 5) {
+            clearInterval(intervalId);
+        }
+        count++;
+    }, 1000);
 }
 
-// Misol uchun
-console.log(reduceNestedArray([1, [1, 2, [4]]])); // 8
-console.log(reduceNestedArray([[[5]], 3, [2, [1]]])); // 11
-console.log(reduceNestedArray([10, [20, [30, [40]]]])); // 100
+printNumbers();
