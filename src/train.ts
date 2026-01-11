@@ -1,49 +1,25 @@
-/*
-ZM-TASK
+/**
 
-Shunday function yozing, u function parametrda berilgan sonni har bir raqamini kvadratiga ogirib qaytarsin. MASALAN: squareDigits(9119) return "811181".
+ZP-TASK
 
-@MITASK
-*/
-
-function squareDigits(num: number): string {
-    return num
-        .toString()
-        .split('')
-        .map((digit) => {
-            const digitNum = parseInt(digit, 10);
-            return (digitNum * digitNum).toString();
-        })
-        .join('');
-}
-
-console.log(squareDigits(9119)); 
-
-/*
-ZO-TASK
-
-Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak. MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true.
+Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin. MASALAN: countNumberAndLetters("string152%\¥") return {number:3, letter:6}.
 
 @MITASK
 */
 
-function areParenthesesBalanced(str: string): boolean {
-    let balance = 0;
+function countNumberAndLetters(input: string): { number: number; letter: number } {
+    let numberCount = 0;
+    let letterCount = 0;
 
-    for (const char of str) {
-        if (char === '(') {
-            balance++;
-        } else if (char === ')') {
-            balance--;
-            if (balance < 0) {
-                return false; 
-            }
+    for (const char of input) {
+        if (char >= '0' && char <= '9') {
+            numberCount++;
+        } else if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+            letterCount++;
         }
     }
 
-    return balance === 0;
+    return { number: numberCount, letter: letterCount };
 }
 
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
-
-
+console.log(countNumberAndLetters("string152%\\¥")); // { number: 3, letter: 6 }
