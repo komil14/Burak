@@ -1,26 +1,33 @@
 /**
+ 
 
-ZQ-TASK
+Shunday function yozing, u 2 ta array parametr qabul qilsin.
+Siz bu ikki arrayning qiymatlari o'xshash bo'lishini 
+(ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
 
-Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin. MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4].
-
-@MITASK
+MASALAN:
+areArraysEqual([1, 2, 3], [3, 1, 2]) // true
 
  */
 
-function findDuplicates(arr: number[]): number[] {
-    const seen = new Set<number>();
-    const duplicates = new Set<number>();
+function areArraysEqual(arr1: any[], arr2: any[]): boolean {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
 
-    for (const num of arr) {
-        if (seen.has(num)) {
-            duplicates.add(num);
-        } else {
-            seen.add(num);
+    const sortedArr1 = [...arr1].sort();
+    const sortedArr2 = [...arr2].sort();
+
+    for (let i = 0; i < sortedArr1.length; i++) {
+        if (sortedArr1[i] !== sortedArr2[i]) {
+            return false;
         }
     }
-    return Array.from(duplicates);
+
+    return true;
 }
 
-const result = findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]);
-console.log(result);
+console.log(areArraysEqual([1, 2, 3], [3, 1, 2])); // true
+console.log(areArraysEqual([1, 2, 2], [2, 1, 1])); // false
+console.log(areArraysEqual(['a', 'b', 'c'], ['c', 'b', 'a'])); // true
+console.log(areArraysEqual([1, 2, 3], [4, 5, 6])); // false
