@@ -1,33 +1,29 @@
 /**
- 
+ZS-TASK
 
-Shunday function yozing, u 2 ta array parametr qabul qilsin.
-Siz bu ikki arrayning qiymatlari o'xshash bo'lishini 
-(ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
+Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin. MASALAN: singleNumber([4, 2, 1, 2, 1]) return 4.
 
-MASALAN:
-areArraysEqual([1, 2, 3], [3, 1, 2]) // true
-
+@MITASK
  */
 
-function areArraysEqual(arr1: any[], arr2: any[]): boolean {
-    if (arr1.length !== arr2.length) {
-        return false;
-    }
+function singleNumber(nums: number[]): number {
+    const numCount: { [key: number]: number } = {};
 
-    const sortedArr1 = [...arr1].sort();
-    const sortedArr2 = [...arr2].sort();
-
-    for (let i = 0; i < sortedArr1.length; i++) {
-        if (sortedArr1[i] !== sortedArr2[i]) {
-            return false;
+    for (const num of nums) {
+        if (numCount[num]) {
+            numCount[num]++;
+        } else {
+            numCount[num] = 1;
         }
     }
 
-    return true;
+    for (const num in numCount) {
+        if (numCount[num] === 1) {
+            return parseInt(num);
+        }
+    }
+
+    throw new Error("No single number found");
 }
 
-console.log(areArraysEqual([1, 2, 3], [3, 1, 2])); // true
-console.log(areArraysEqual([1, 2, 2], [2, 1, 1])); // false
-console.log(areArraysEqual(['a', 'b', 'c'], ['c', 'b', 'a'])); // true
-console.log(areArraysEqual([1, 2, 3], [4, 5, 6])); // false
+console.log(singleNumber([4, 2, 1, 2, 1]));
