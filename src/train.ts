@@ -1,29 +1,27 @@
 /**
-ZS-TASK
+ZT-TASK
 
-Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin. MASALAN: singleNumber([4, 2, 1, 2, 1]) return 4.
+Shunday function yozing, u parametridagi string ichida 1 martadan ortiq qaytarilmagan birinchi harf indeksini qaytarsin. MASALAN: firstUniqueCharIndex("stamp") return 0.
 
 @MITASK
  */
 
-function singleNumber(nums: number[]): number {
-    const numCount: { [key: number]: number } = {};
+function firstUniqueCharIndex(str: string): number {
+    const charCount: { [key: string]: number } = {};
 
-    for (const num of nums) {
-        if (numCount[num]) {
-            numCount[num]++;
-        } else {
-            numCount[num] = 1;
+    for (let char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+
+    for (let i = 0; i < str.length; i++) {
+        if (charCount[str[i]] === 1) {
+            return i;
         }
     }
 
-    for (const num in numCount) {
-        if (numCount[num] === 1) {
-            return parseInt(num);
-        }
-    }
-
-    throw new Error("No single number found");
+    return -1; 
 }
 
-console.log(singleNumber([4, 2, 1, 2, 1]));
+console.log(firstUniqueCharIndex("stamp"));
+console.log(firstUniqueCharIndex("swiss")); 
+console.log(firstUniqueCharIndex("aabbcc")); 
