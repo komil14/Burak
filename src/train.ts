@@ -1,31 +1,25 @@
 /**
-ZU-TASK
+ZV-TASK
 
-Shunday function yozing, u parametridagi array ichida takrorlanmagan raqamlar yig'indisini qaytarsin. MASALAN: sumOfUnique([1,2,3,2]) return 4.
+Shunday function yozing, u parametridagi array ichidagi barcha nollarni array oxiriga qoyib qolgan raqamlar ketma-ketligini saqlasin. MASALAN: moveZeroes([0, 1, 0, 3, 12]) return [1, 3, 12, 0, 0].
 
 @MITASK
  */
 
-function sumOfUnique(arr: number[]): number {
-    const numCount: { [key: number]: number } = {};
-    let sum = 0;
+function moveZeroes(nums: number[]): number[] {
+    let nonZeroIndex = 0;
 
-    for (const num of arr) {
-        if (numCount[num]) {
-            numCount[num]++;
-        } else {
-            numCount[num] = 1;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            nums[nonZeroIndex] = nums[i];
+            nonZeroIndex++;
         }
+    }   
+    for (let i = nonZeroIndex; i < nums.length; i++) {
+        nums[i] = 0;
     }
-
-    for (const num in numCount) {
-        if (numCount[num] === 1) {
-            sum += parseInt(num);
-        }
-    }
-
-    return sum;
-}
-
-console.log(sumOfUnique([1, 2, 3, 2]));
-console.log(sumOfUnique([4, 5, 6, 5, 4, 7]));
+    return nums;
+}   
+console.log(moveZeroes([0, 1, 0, 3, 12])); 
+console.log(moveZeroes([0, 0, 1]));
+console.log(moveZeroes([4, 2, 0, 0, 3, 0, 5]));
